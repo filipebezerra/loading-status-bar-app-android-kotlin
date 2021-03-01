@@ -17,6 +17,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.net.toUri
 import androidx.databinding.DataBindingUtil
+import androidx.databinding.DataBindingUtil.setContentView
 import com.udacity.ButtonState.Completed
 import com.udacity.ButtonState.Loading
 import com.udacity.databinding.MainActivityBinding
@@ -35,7 +36,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        DataBindingUtil.setContentView<MainActivityBinding>(this, R.layout.main_activity)
+        setContentView<MainActivityBinding>(this, R.layout.main_activity)
             .apply {
                 viewBinding = this
                 setSupportActionBar(toolbar)

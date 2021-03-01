@@ -9,6 +9,7 @@ import android.content.Intent
 import android.os.Build
 import androidx.core.app.NotificationCompat
 import com.udacity.DetailActivity
+import com.udacity.DetailActivity.Companion.bundleExtrasOf
 import com.udacity.DownloadStatus
 import com.udacity.R
 
@@ -28,7 +29,7 @@ fun NotificationManager.sendDownloadCompletedNotification(
     // https://developer.android.com/training/notify-user/build-notification#click
     val contentIntent = Intent(context, DetailActivity::class.java).apply {
         flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-        putExtras(createDetailExtras(fileName, downloadStatus))
+        putExtras(bundleExtrasOf(fileName, downloadStatus))
     }
     val contentPendingIntent = PendingIntent.getActivity(
         context,
