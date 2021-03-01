@@ -3,10 +3,14 @@
     <string name="app_description">Download files from Internet</string>
     <string name="action_settings">Settings</string>
 
+    <string name="notification_channel_id" translatable="false">loading_status</string>
+    <string name="notification_channel_name" translatable="false">Download status</string>
+    <string name="notification_channel_description" translatable="false">loading_status</string>
 
     <string name="notification_title">Udacity: Android Kotlin Nanodegree </string>
     <string name="notification_description">The Project 3 repository is downloaded</string>
     <string name="notification_button">See changes</string>
+    <string name="notification_action_check_status">Check the status</string>
 
     <string name="button_name">Click me</string>
     <string name="button_loading">We are loading </string>
