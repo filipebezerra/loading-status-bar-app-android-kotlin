@@ -16,15 +16,12 @@ import android.widget.RadioButton
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.net.toUri
-import androidx.databinding.DataBindingUtil
 import androidx.databinding.DataBindingUtil.setContentView
 import com.udacity.ButtonState.Completed
 import com.udacity.ButtonState.Loading
+import com.udacity.DownloadStatus.UNKNOWN
 import com.udacity.databinding.MainActivityBinding
-import com.udacity.util.ext.createDownloadStatusChannel
 import com.udacity.util.ext.getDownloadManager
-import com.udacity.util.ext.getNotificationManager
-import com.udacity.util.ext.sendDownloadCompletedNotification
 import timber.log.Timber
 
 class MainActivity : AppCompatActivity() {
@@ -33,6 +30,7 @@ class MainActivity : AppCompatActivity() {
     private var downloadFileName = ""
     private var downloadID: Long = NO_DOWNLOAD
     private var downloadContentObserver: ContentObserver? = null
+    private var downloadNotificator: DownloadNotificator? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -74,32 +72,18 @@ class MainActivity : AppCompatActivity() {
             val id = intent?.getLongExtra(EXTRA_DOWNLOAD_ID, -1)
             id?.let {
                 val downloadStatus = getDownloadManager().queryStatus(it)
-
                 Timber.d("Download $it completed with status: ${downloadStatus.statusText}")
-                downloadStatus.takeIf { status -> status != DownloadStatus.UNKNOWN }?.run {
-                    getNotificationManager().run {
-                        createDownloadStatusChannel(applicationContext)
-                        sendDownloadCompletedNotification(
-                            downloadFileName,
-                            downloadStatus,
-                            applicationContext
-                        )
-                    }
+                unregisterDownloadContentObserver()
+                downloadStatus.takeIf { status -> status != UNKNOWN }?.run {
+                    getDownloadNotificator().notify(downloadFileName, downloadStatus)
                 }
             }
-
-            //if (downloadID == id) {
-
-            //unregisterDownloadContentObserver()
-
-
-//                Toast.makeText(
-//                    this@MainActivity,
-//                    "Download Completed",
-//                    Toast.LENGTH_SHORT
-//                ).show();
-            //}
         }
+    }
+
+    private fun getDownloadNotificator(): DownloadNotificator = when (downloadNotificator) {
+        null -> DownloadNotificator(this, lifecycle).also { downloadNotificator = it }
+        else -> downloadNotificator!!
     }
 
     private fun DownloadManager.queryStatus(id: Long): DownloadStatus {
@@ -109,10 +93,10 @@ class MainActivity : AppCompatActivity() {
                     return when (getInt(getColumnIndex(COLUMN_STATUS))) {
                         STATUS_SUCCESSFUL -> DownloadStatus.SUCCESSFUL
                         STATUS_FAILED -> DownloadStatus.FAILED
-                        else -> DownloadStatus.UNKNOWN
+                        else -> UNKNOWN
                     }
                 }
-                return DownloadStatus.UNKNOWN
+                return UNKNOWN
             }
         }
     }
@@ -188,6 +172,7 @@ class MainActivity : AppCompatActivity() {
         super.onDestroy()
         unregisterReceiver(onDownloadCompletedReceiver)
         unregisterDownloadContentObserver()
+        downloadNotificator = null
     }
 
     private fun unregisterDownloadContentObserver() {

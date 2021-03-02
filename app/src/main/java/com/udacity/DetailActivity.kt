@@ -3,7 +3,6 @@ package com.udacity
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
-import androidx.databinding.DataBindingUtil
 import androidx.databinding.DataBindingUtil.setContentView
 import com.udacity.databinding.DetailActivityBinding
 
@@ -17,6 +16,7 @@ class DetailActivity : AppCompatActivity() {
                     with(detailContent) {
                         fileNameText.text = it.getString(EXTRA_FILE_NAME)
                         downloadStatusText.text = it.getString(EXTRA_DOWNLOAD_STATUS)
+                        okButton.setOnClickListener { finish() }
                     }
                 }
             }
