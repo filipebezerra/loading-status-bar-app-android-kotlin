@@ -1,4 +1,4 @@
-package com.udacity
+package com.udacity.loading
 
 sealed class ButtonState {
     object Clicked : ButtonState()

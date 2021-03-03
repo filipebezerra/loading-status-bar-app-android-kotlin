@@ -1,6 +1,5 @@
-package com.udacity
+package com.udacity.loading
 
-import android.animation.Animator
 import android.animation.AnimatorSet
 import android.animation.ValueAnimator
 import android.content.Context
@@ -11,7 +10,8 @@ import android.view.View
 import android.view.animation.LinearInterpolator
 import androidx.core.content.ContextCompat
 import androidx.core.content.withStyledAttributes
-import com.udacity.ButtonState.*
+import com.udacity.loading.ButtonState.*
+import com.udacity.R
 import com.udacity.util.ext.disableViewDuringAnimation
 import timber.log.Timber
 import java.util.concurrent.TimeUnit

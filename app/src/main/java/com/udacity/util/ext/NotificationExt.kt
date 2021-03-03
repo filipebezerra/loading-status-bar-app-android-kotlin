@@ -8,9 +8,9 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build
 import androidx.core.app.NotificationCompat
-import com.udacity.DetailActivity
-import com.udacity.DetailActivity.Companion.bundleExtrasOf
-import com.udacity.DownloadStatus
+import com.udacity.detail.DetailActivity
+import com.udacity.detail.DetailActivity.Companion.bundleExtrasOf
+import com.udacity.download.DownloadStatus
 import com.udacity.R
 
 private val DOWNLOAD_COMPLETED_ID = 1

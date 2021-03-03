@@ -76,7 +76,7 @@
                 />
         </RadioGroup>
 
-        <com.udacity.LoadingButton
+        <com.udacity.loading.LoadingButton
             android:id="@+id/loading_button"
             android:layout_width="0dp"
             android:layout_height="60dp"

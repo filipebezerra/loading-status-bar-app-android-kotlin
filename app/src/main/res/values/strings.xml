@@ -21,4 +21,6 @@
     <string name="file_name">File name:</string>
     <string name="download_status">Status:</string>
     <string name="download_completed">Download Completed</string>
+    <string name="download_status_content_description">Download status</string>
+    <string name="unknown">Unknown</string>
 </resources>

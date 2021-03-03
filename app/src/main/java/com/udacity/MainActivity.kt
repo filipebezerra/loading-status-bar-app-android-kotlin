@@ -17,10 +17,12 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.net.toUri
 import androidx.databinding.DataBindingUtil.setContentView
-import com.udacity.ButtonState.Completed
-import com.udacity.ButtonState.Loading
-import com.udacity.DownloadStatus.UNKNOWN
+import com.udacity.loading.ButtonState.Completed
+import com.udacity.loading.ButtonState.Loading
+import com.udacity.download.DownloadStatus.UNKNOWN
 import com.udacity.databinding.MainActivityBinding
+import com.udacity.download.DownloadNotificator
+import com.udacity.download.DownloadStatus
 import com.udacity.util.ext.getDownloadManager
 import timber.log.Timber
 
